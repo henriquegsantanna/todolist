@@ -19,6 +19,26 @@ def Cadastro():
         print("Usuario cadastrado!")
         return
             
+def Login():
+    while True:
+        usuario = input("Digite seu nome de usuario: ")
+        senha = input("Digite sua senha: ")
+        arquivo = open("usuarios.txt", "r")
+        
+        for linha in arquivo.readlines():
+            valores = linha.split()
+            if usuario == valores[0].strip() and senha == valores[1].strip():
+                print(f"Bem vindo {usuario}!")
+                Menu()
+                break
+            else:
+                print("Usuario ou senha incorreto.")
+                continue
+            
+def Menu():
+    while True:
+        print("Sucesso.")
+        break
             
 while True:
     print("Bem-Vindo!")
