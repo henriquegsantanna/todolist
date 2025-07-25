@@ -2,10 +2,12 @@ def Cadastro():
     while True:
         usuario = input("Digite seu nome de usuario: ")
         senha = input("Digite sua senha: ")
-        arquivo = open('usuarios.txt', 'r')
+        arquivo = open("usuarios.txt", "r")
         
-        if usuario in arquivo:
-            print("Usuario existente.")
+        for linha in arquivo.readlines():
+            valores = linha.split("-")
+            if usuario == valores[0].strip():
+                print("Usuario existente.")
             continue
         else:
             tarefasFazer = []
