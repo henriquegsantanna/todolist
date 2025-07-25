@@ -5,10 +5,10 @@ def Cadastro():
         arquivo = open("usuarios.txt", "r")
         
         for linha in arquivo.readlines():
-            valores = linha.split("-")
+            valores = linha.split()
             if usuario == valores[0].strip():
                 print("Usuario existente.")
-                continue
+                return
 
 
         tarefasFazer = []
