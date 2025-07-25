@@ -14,15 +14,17 @@ def Cadastro():
             arquivo.write(' ' ' ' ' ' ' ' ' ', usuario, senha, tarefasFazer, tarefasFeitas, tarefasExcluidas)
             print("Usuario cadastrado!")
             Menu()
-
-#while True:
+            
+            
+while True:
     print("Bem-Vindo!")
     print("1 - Cadastrar \n2 - Entrar")
     opcao = input("Selecione uma opcao: ")
-    if opcao == 1:
+    
+    if opcao == "1":
         Cadastro()
-    elif opcao == 2:
+    elif opcao == "2":
         Login()
     else:
-        print("Selecione uma opcao valida.")
+        print("Opcao invalida.")
         continue
