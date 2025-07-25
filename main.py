@@ -8,14 +8,16 @@ def Cadastro():
             valores = linha.split("-")
             if usuario == valores[0].strip():
                 print("Usuario existente.")
-            continue
-        else:
-            tarefasFazer = []
-            tarefasFeitas = []
-            tarefasExcluidas = []
-            arquivo.write(' ' ' ' ' ' ' ' ' ', usuario, senha, tarefasFazer, tarefasFeitas, tarefasExcluidas)
-            print("Usuario cadastrado!")
-            Menu()
+                continue
+
+
+        tarefasFazer = []
+        tarefasFeitas = []
+        tarefasExcluidas = []
+        cadastrar = open("usuarios.txt", "a")
+        cadastrar.write(f'{usuario} {senha} {tarefasFazer} {tarefasFeitas} {tarefasExcluidas}\n')
+        print("Usuario cadastrado!")
+        return
             
             
 while True:
