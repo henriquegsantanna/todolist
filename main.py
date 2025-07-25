@@ -1,3 +1,9 @@
+def Inicio():
+    print("Bem-Vindo!")
+    print("1 - Cadastrar \n2 - Entrar \n3 - Sair")
+    opcao = input("Selecione uma opcao: ")  
+    return opcao
+
 def Cadastro():
     while True:
         usuario = input("Digite seu nome de usuario: ")
@@ -41,14 +47,16 @@ def Menu():
         break
             
 while True:
-    print("Bem-Vindo!")
-    print("1 - Cadastrar \n2 - Entrar")
-    opcao = input("Selecione uma opcao: ")
-    
-    if opcao == "1":
+    escolha = Inicio()
+
+    if escolha == "1":
         Cadastro()
-    elif opcao == "2":
+        break
+    elif escolha == "2":
         Login()
+        break
+    elif escolha == "3":
+        print("Voce saiu.")
+        break
     else:
         print("Opcao invalida.")
-        continue
