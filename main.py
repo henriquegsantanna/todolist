@@ -6,15 +6,17 @@ def Inicio():
 
 def Cadastro():
     while True:
+        print("-"* 10 + "CADASTRO" + "-"* 10)
         usuario = input("Digite seu nome de usuario: ")
         senha = input("Digite sua senha: ")
-        arquivo = open("usuarios.txt", "r")
         
+        arquivo = open("usuarios.txt", "r")
         for linha in arquivo.readlines():
             valores = linha.split()
             if usuario == valores[0].strip():
                 print("Usuario existente.")
                 return
+        arquivo.close()
 
 
         tarefasFazer = []
@@ -22,29 +24,70 @@ def Cadastro():
         tarefasExcluidas = []
         cadastrar = open("usuarios.txt", "a")
         cadastrar.write(f'{usuario} {senha} {tarefasFazer} {tarefasFeitas} {tarefasExcluidas}\n')
+        cadastrar.close()
         print("Usuario cadastrado!")
-        return
+        return Login()
             
 def Login():
     while True:
+        print("-"* 10 + "LOGIN" + "-"* 10)
         usuario = input("Digite seu nome de usuario: ")
         senha = input("Digite sua senha: ")
-        arquivo = open("usuarios.txt", "r")
+        encontrado = False
         
+        arquivo = open("usuarios.txt", "r")
         for linha in arquivo.readlines():
             valores = linha.split()
             if usuario == valores[0].strip() and senha == valores[1].strip():
                 print(f"Bem vindo {usuario}!")
+                encontrado = True
                 Menu()
                 break
-            else:
-                print("Usuario ou senha incorreto.")
-                continue
+        arquivo.close()
+        if not encontrado:
+            print("Usuario ou senha incorreto.")
+            continue
+  
+def adicionarTarefa():
+    while True:
+        print("Funcionando1")
+        break
+
+def concluirTarefa():
+    while True:
+        print("Funcionando2")
+        break
+
+def excluirTarefa():
+    while True:
+        print("Funcionando3")
+        break
+
+def verTarefa():
+    while True:
+        print("Funcionando4")
+        break
             
 def Menu():
     while True:
-        print("Sucesso.")
-        break
+        print("1 - Adicionar tarefa \n2 - Concluir tarefa \n3 - Excluir tarefa \n4 - Ver tarefas \n5 - Sair")
+        escolhaMenu = input("Selecione a opcao que deseja: ")
+        
+        if escolhaMenu == "1":
+            adicionarTarefa()
+            break
+        elif escolhaMenu == "2":
+            concluirTarefa()
+            break
+        elif escolhaMenu == "3":
+            excluirTarefa()
+            break
+        elif escolhaMenu == "4":
+            verTarefa()
+            break
+        elif escolhaMenu == "5":
+            print("Voce saiu.")
+            break
             
 while True:
     escolha = Inicio()
