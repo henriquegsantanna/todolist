@@ -15,7 +15,7 @@ def Cadastro():
             valores = linha.split()
             if usuario == valores[0].strip():
                 print("Usuario existente.")
-                return
+                Cadastro()
         arquivo.close()
 
 
@@ -41,17 +41,19 @@ def Login():
             if usuario == valores[0].strip() and senha == valores[1].strip():
                 print(f"Bem vindo {usuario}!")
                 encontrado = True
-                Menu()
-                break
+                Menu(usuario)
+                return usuario
         arquivo.close()
         if not encontrado:
             print("Usuario ou senha incorreto.")
-            continue
   
 def adicionarTarefa():
     while True:
-        print("Funcionando1")
-        break
+        tarefaAdicionada = input("Digite a tarefa que deseja adicionar: ")
+        
+        arquivo = open("usuarios.txt", "r")
+        for linha in arquivo.readlines():
+            valores = linha.split()
 
 def concluirTarefa():
     while True:
@@ -68,13 +70,13 @@ def verTarefa():
         print("Funcionando4")
         break
             
-def Menu():
+def Menu(usuario_logado):
     while True:
         print("1 - Adicionar tarefa \n2 - Concluir tarefa \n3 - Excluir tarefa \n4 - Ver tarefas \n5 - Sair")
         escolhaMenu = input("Selecione a opcao que deseja: ")
         
         if escolhaMenu == "1":
-            adicionarTarefa()
+            adicionarTarefa(usuario_logado)
             break
         elif escolhaMenu == "2":
             concluirTarefa()
