@@ -1,3 +1,5 @@
+import ast
+
 def Inicio():
     print("Bem-Vindo!")
     print("1 - Cadastrar \n2 - Entrar \n3 - Sair")
@@ -47,13 +49,29 @@ def Login():
         if not encontrado:
             print("Usuario ou senha incorreto.")
   
-def adicionarTarefa():
-    while True:
+def adicionarTarefa(usuario_logado):
         tarefaAdicionada = input("Digite a tarefa que deseja adicionar: ")
         
-        arquivo = open("usuarios.txt", "r")
-        for linha in arquivo.readlines():
-            valores = linha.split()
+        with open("usuarios.txt", "r") as arquivo:
+            linhas = arquivo.readlines()
+        
+        for i, linha in enumerate(linhas):
+            valores = linha.strip().split(maxsplit=4)
+            if valores[0] == usuario_logado:
+                senha = valores[1]
+                tarefasFazer = ast.literal_eval(valores[2])
+                tarefasFeitas = ast.literal_eval(valores[3])
+                tarefasExcluidas = ast.literal_eval(valores[4])
+                tarefasFazer.append(tarefaAdicionada)
+                nova_linha = f"{usuario_logado} {senha} {repr(tarefasFazer)} {repr(tarefasFeitas)} {repr(tarefasExcluidas)}\n"
+                linhas[i] = nova_linha
+                print("Tarefa adicionada!")
+                break
+                
+        with open("usuarios.txt", "w") as arquivo:
+            arquivo.writelines(linhas)
+            
+        Menu(usuario_logado)
 
 def concluirTarefa():
     while True:
