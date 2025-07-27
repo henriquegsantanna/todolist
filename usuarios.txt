@@ -1,2 +1,2 @@
 1 | 1 | ['comer', 'beber', 'jogar', 'comer agua', 'jantar'] | [] | []
-2 | 2 | ['almocar', 'beber 2L de agua'] | [] | []
+2 | 2 | ['almocar', 'beber 2L de agua', 'Jantar com a modelo'] | [] | []

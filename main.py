@@ -68,7 +68,7 @@ def adicionarTarefa(usuario_logado):
             tarefasFeitas = ast.literal_eval(valores[3])
             tarefasExcluidas = ast.literal_eval(valores[4])
 
-            tarefasFazer.append(tarefaAdicionada)
+            tarefasFazer.append(tarefaAdicionada.capitalize())
 
             nova_linha = f"{usuario_logado} | {senha} | {repr(tarefasFazer)} | {repr(tarefasFeitas)} | {repr(tarefasExcluidas)}\n"
             novas_linhas.append(nova_linha)
@@ -94,7 +94,7 @@ def concluirTarefa(usuario_logado):
                 tarefasFazer = ast.literal_eval(valores[2])
                 print(' | '.join(tarefasFazer))
                 tarefaConcluida = input("Digite a tarefa que deseja concluir: ")
-                if tarefaConcluida in tarefasFazer:
+                if tarefaConcluida.capitalize() in tarefasFazer:
                     print("Esta.")
                 else:
                     print("Não esta.")
