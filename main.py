@@ -82,17 +82,25 @@ def adicionarTarefa(usuario_logado):
 
     Menu(usuario_logado)
 
-def concluirTarefa():
-    while True:
-        print("Funcionando2")
-        break
+def concluirTarefa(usuario_logado):
+    
+    with open("usuarios.txt", "r") as arquivo:
+        linhas = arquivo.readlines()
+        
+        for linha in linhas:
+            valores = [v.strip() for v in linha.strip().split("|")]
+            
+            if valores[0] == usuario_logado:
+                tarefasFazer = ast.literal_eval(valores[2])
+                print(' | '.join(tarefasFazer))
+                tarefaConcluida = input("Digite a tarefa que deseja concluir: ")
 
-def excluirTarefa():
+def excluirTarefa(usuario_logado):
     while True:
         print("Funcionando3")
         break
 
-def verTarefa():
+def verTarefa(usuario_logado):
     while True:
         print("Funcionando4")
         break
@@ -106,13 +114,13 @@ def Menu(usuario_logado):
             adicionarTarefa(usuario_logado)
             break
         elif escolhaMenu == "2":
-            concluirTarefa()
+            concluirTarefa(usuario_logado)
             break
         elif escolhaMenu == "3":
-            excluirTarefa()
+            excluirTarefa(usuario_logado)
             break
         elif escolhaMenu == "4":
-            verTarefa()
+            verTarefa(usuario_logado)
             break
         elif escolhaMenu == "5":
             print("Voce saiu.")
