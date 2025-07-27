@@ -14,7 +14,7 @@ def Cadastro():
         
         arquivo = open("usuarios.txt", "r")
         for linha in arquivo.readlines():
-            valores = linha.split()
+            valores = linha.split("|")
             if usuario == valores[0].strip():
                 print("Usuario existente.")
                 Cadastro()
@@ -25,7 +25,7 @@ def Cadastro():
         tarefasFeitas = []
         tarefasExcluidas = []
         cadastrar = open("usuarios.txt", "a")
-        cadastrar.write(f'{usuario} {senha} {tarefasFazer} {tarefasFeitas} {tarefasExcluidas}\n')
+        cadastrar.write(f'{usuario} | {senha} | {tarefasFazer} | {tarefasFeitas} | {tarefasExcluidas}\n')
         cadastrar.close()
         print("Usuario cadastrado!")
         return Login()
@@ -39,7 +39,7 @@ def Login():
         
         arquivo = open("usuarios.txt", "r")
         for linha in arquivo.readlines():
-            valores = linha.split()
+            valores = linha.split("|")
             if usuario == valores[0].strip() and senha == valores[1].strip():
                 print(f"Bem vindo {usuario}!")
                 encontrado = True
@@ -50,28 +50,37 @@ def Login():
             print("Usuario ou senha incorreto.")
   
 def adicionarTarefa(usuario_logado):
-        tarefaAdicionada = input("Digite a tarefa que deseja adicionar: ")
-        
-        with open("usuarios.txt", "r") as arquivo:
-            linhas = arquivo.readlines()
-        
-        for i, linha in enumerate(linhas):
-            valores = linha.strip().split(maxsplit=4)
-            if valores[0] == usuario_logado:
-                senha = valores[1]
-                tarefasFazer = ast.literal_eval(valores[2])
-                tarefasFeitas = ast.literal_eval(valores[3])
-                tarefasExcluidas = ast.literal_eval(valores[4])
-                tarefasFazer.append(tarefaAdicionada)
-                nova_linha = f"{usuario_logado} {senha} {repr(tarefasFazer)} {repr(tarefasFeitas)} {repr(tarefasExcluidas)}\n"
-                linhas[i] = nova_linha
-                print("Tarefa adicionada!")
-                break
-                
-        with open("usuarios.txt", "w") as arquivo:
-            arquivo.writelines(linhas)
-            
-        Menu(usuario_logado)
+    tarefaAdicionada = input("Digite a tarefa que deseja adicionar: ")
+
+    with open("usuarios.txt", "r") as arquivo:
+        linhas = arquivo.readlines()
+
+    novas_linhas = []
+
+    for linha in linhas:
+        #nova_lista = [expressao for item in lista] -- list comprehension
+        #pega cada item da lista, aplica a expressao nele e guarda o resultado em uma nova lista
+        valores = [v.strip() for v in linha.strip().split("|")]
+
+        if valores[0] == usuario_logado:
+            senha = valores[1]
+            tarefasFazer = ast.literal_eval(valores[2])
+            tarefasFeitas = ast.literal_eval(valores[3])
+            tarefasExcluidas = ast.literal_eval(valores[4])
+
+            tarefasFazer.append(tarefaAdicionada)
+
+            nova_linha = f"{usuario_logado} | {senha} | {repr(tarefasFazer)} | {repr(tarefasFeitas)} | {repr(tarefasExcluidas)}\n"
+            novas_linhas.append(nova_linha)
+        else:
+            novas_linhas.append(linha)
+
+    with open("usuarios.txt", "w") as arquivo:
+        arquivo.writelines(novas_linhas)
+
+    print("Tarefa adicionada!")
+
+    Menu(usuario_logado)
 
 def concluirTarefa():
     while True:
