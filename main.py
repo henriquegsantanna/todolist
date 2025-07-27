@@ -94,6 +94,10 @@ def concluirTarefa(usuario_logado):
                 tarefasFazer = ast.literal_eval(valores[2])
                 print(' | '.join(tarefasFazer))
                 tarefaConcluida = input("Digite a tarefa que deseja concluir: ")
+                if tarefaConcluida in tarefasFazer:
+                    print("Esta.")
+                else:
+                    print("Não esta.")
 
 def excluirTarefa(usuario_logado):
     while True:
