@@ -50,6 +50,7 @@ def Login():
             print("Usuario ou senha incorreto.")
   
 def adicionarTarefa(usuario_logado):
+    print("-"* 5 + "ADICIONAR TAREFA" + "-"* 5)
     tarefaAdicionada = input("Digite a tarefa que deseja adicionar: ")
 
     with open("usuarios.txt", "r") as arquivo:
@@ -82,6 +83,7 @@ def adicionarTarefa(usuario_logado):
     Menu(usuario_logado)
 
 def concluirTarefa(usuario_logado):
+    print("-"* 5 + "CONCLUIR TAREFA" + "-"* 5)
     with open("usuarios.txt", "r") as arquivo:
         linhas = arquivo.readlines()
         
@@ -96,7 +98,7 @@ def concluirTarefa(usuario_logado):
             tarefasFeitas = ast.literal_eval(valores[3])
             tarefasExcluidas = ast.literal_eval(valores[4])
             
-            print(' | '.join(tarefasFazer))
+            print(f"Tarefas para fazer: {', '.join(map(str, tarefasFazer))}")
             tarefaConcluida = input("Digite a tarefa que deseja concluir: ")
             
             if tarefaConcluida.capitalize() in tarefasFazer:
@@ -119,6 +121,7 @@ def concluirTarefa(usuario_logado):
     Menu(usuario_logado)
     
 def excluirTarefa(usuario_logado):
+    print("-"* 5 + "EXCLUIR TAREFA" + "-"* 5)
     with open("usuarios.txt", "r") as arquivo:
         linhas = arquivo.readlines()
         
@@ -132,7 +135,7 @@ def excluirTarefa(usuario_logado):
             tarefasFeitas = ast.literal_eval(valores[3])
             tarefasExcluidas = ast.literal_eval(valores[4])
             
-            print(' | '.join(tarefasFazer))
+            print(f"Tarefas para fazer: {', '.join(map(str, tarefasFazer))}")
             tarefaExcluida = input("Digite a tarefa que deseja excluir: ")
             
             if tarefaExcluida.capitalize() in tarefasFazer:
@@ -155,6 +158,7 @@ def excluirTarefa(usuario_logado):
     Menu(usuario_logado)
 
 def verTarefa(usuario_logado):
+    print("-"* 5 + "VER TAREFAS" + "-"* 5)
     with open("usuarios.txt", "r") as arquivo:
         linhas = arquivo.readlines()
         
@@ -166,12 +170,15 @@ def verTarefa(usuario_logado):
             tarefasFeitas = ast.literal_eval(valores[3])
             tarefasExcluidas = ast.literal_eval(valores[4])
             
-            print(f"Tarefas para fazer: {tarefasFazer}\nTarefas feitas: {tarefasFeitas}\nTarefas excluidas: {tarefasExcluidas}")      
+            print(f"Tarefas para fazer: {', '.join(map(str, tarefasFazer))}")
+            print(f"Tarefas feitas: {', '.join(map(str, tarefasFeitas))}")
+            print(f"Tarefas excluidas: {', '.join(map(str, tarefasExcluidas))}")
                     
     Menu(usuario_logado)
             
 def Menu(usuario_logado):
     while True:
+        print("-"* 10 + "MENU" + "-"* 10)
         print("1 - Adicionar tarefa \n2 - Concluir tarefa \n3 - Excluir tarefa \n4 - Ver tarefas \n5 - Sair")
         escolhaMenu = input("Selecione a opcao que deseja: ")
         
