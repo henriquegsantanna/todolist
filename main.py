@@ -155,9 +155,20 @@ def excluirTarefa(usuario_logado):
     Menu(usuario_logado)
 
 def verTarefa(usuario_logado):
-    while True:
-        print("Funcionando4")
-        break
+    with open("usuarios.txt", "r") as arquivo:
+        linhas = arquivo.readlines()
+        
+    for linha in linhas:
+        valores = [v.strip() for v in linha.strip().split("|")]
+        if valores[0] == usuario_logado:
+            senha = valores[1]
+            tarefasFazer = ast.literal_eval(valores[2])
+            tarefasFeitas = ast.literal_eval(valores[3])
+            tarefasExcluidas = ast.literal_eval(valores[4])
+            
+            print(f"Tarefas para fazer: {tarefasFazer}\nTarefas feitas: {tarefasFeitas}\nTarefas excluidas: {tarefasExcluidas}")      
+                    
+    Menu(usuario_logado)
             
 def Menu(usuario_logado):
     while True:
