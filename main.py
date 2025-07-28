@@ -79,26 +79,44 @@ def adicionarTarefa(usuario_logado):
         arquivo.writelines(novas_linhas)
 
     print("Tarefa adicionada!")
-
     Menu(usuario_logado)
 
 def concluirTarefa(usuario_logado):
-    
     with open("usuarios.txt", "r") as arquivo:
         linhas = arquivo.readlines()
         
-        for linha in linhas:
-            valores = [v.strip() for v in linha.strip().split("|")]
+    novas_linhas = []
+        
+    for linha in linhas:
+        valores = [v.strip() for v in linha.strip().split("|")]
+        
+        if valores[0] == usuario_logado:
+            senha = valores[1]
+            tarefasFazer = ast.literal_eval(valores[2])
+            tarefasFeitas = ast.literal_eval(valores[3])
+            tarefasExcluidas = ast.literal_eval(valores[4])
             
-            if valores[0] == usuario_logado:
-                tarefasFazer = ast.literal_eval(valores[2])
-                print(' | '.join(tarefasFazer))
-                tarefaConcluida = input("Digite a tarefa que deseja concluir: ")
-                if tarefaConcluida.capitalize() in tarefasFazer:
-                    print("Esta.")
-                else:
-                    print("Não esta.")
-
+            print(' | '.join(tarefasFazer))
+            tarefaConcluida = input("Digite a tarefa que deseja concluir: ")
+            
+            if tarefaConcluida.capitalize() in tarefasFazer:
+                    tarefasFazer.remove(tarefaConcluida.capitalize())
+                    nova_linha = f"{usuario_logado} | {senha} | {repr(tarefasFazer)} | {repr(tarefasFeitas)} | {repr(tarefasExcluidas)}\n"
+                    novas_linhas.append(nova_linha)
+                    print("Parabens! Tarefa concluida!")
+            else:
+                print("Tarefa nao encontrada.")
+                concluirTarefa(usuario_logado)
+                return
+            
+        else:
+            novas_linhas.append(linha)
+                
+    with open("usuarios.txt", "w") as arquivo:
+        arquivo.writelines(novas_linhas)
+        
+    Menu(usuario_logado)
+    
 def excluirTarefa(usuario_logado):
     while True:
         print("Funcionando3")
