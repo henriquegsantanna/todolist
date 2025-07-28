@@ -101,6 +101,7 @@ def concluirTarefa(usuario_logado):
             
             if tarefaConcluida.capitalize() in tarefasFazer:
                     tarefasFazer.remove(tarefaConcluida.capitalize())
+                    tarefasFeitas.append(tarefaConcluida.capitalize())
                     nova_linha = f"{usuario_logado} | {senha} | {repr(tarefasFazer)} | {repr(tarefasFeitas)} | {repr(tarefasExcluidas)}\n"
                     novas_linhas.append(nova_linha)
                     print("Parabens! Tarefa concluida!")
@@ -118,9 +119,40 @@ def concluirTarefa(usuario_logado):
     Menu(usuario_logado)
     
 def excluirTarefa(usuario_logado):
-    while True:
-        print("Funcionando3")
-        break
+    with open("usuarios.txt", "r") as arquivo:
+        linhas = arquivo.readlines()
+        
+        novas_linhas = []
+        
+    for linha in linhas:
+        valores = [v.strip() for v in linha.strip().split("|")]
+        if valores[0] == usuario_logado:
+            senha = valores[1]
+            tarefasFazer = ast.literal_eval(valores[2])
+            tarefasFeitas = ast.literal_eval(valores[3])
+            tarefasExcluidas = ast.literal_eval(valores[4])
+            
+            print(' | '.join(tarefasFazer))
+            tarefaExcluida = input("Digite a tarefa que deseja excluir: ")
+            
+            if tarefaExcluida.capitalize() in tarefasFazer:
+                    tarefasFazer.remove(tarefaExcluida.capitalize())
+                    tarefasExcluidas.append(tarefaExcluida.capitalize())
+                    nova_linha = f"{usuario_logado} | {senha} | {repr(tarefasFazer)} | {repr(tarefasFeitas)} | {repr(tarefasExcluidas)}\n"
+                    novas_linhas.append(nova_linha)
+                    print("Tarefa excluida!")
+            else:
+                print("Tarefa nao encontrada.")
+                excluirTarefa(usuario_logado)
+                return
+            
+        else:
+            novas_linhas.append(linha)
+                
+    with open("usuarios.txt", "w") as arquivo:
+        arquivo.writelines(novas_linhas)
+        
+    Menu(usuario_logado)
 
 def verTarefa(usuario_logado):
     while True:

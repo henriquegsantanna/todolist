@@ -1,5 +1,5 @@
 1 | 1 | ['Comer', 'Beber agua', 'Jantar'] | [] | []
-2 | 2 | ['Almocar', 'Jantar', 'Se divertir'] | [] | []
+2 | 2 | [] | ['Jantar', 'Almocar', 'Sair para compras'] | ['Se divertir']
 3 | 3 | ['Almocar'] | [] | []
 4 | 4 | ['Beber', 'Beber 2l de agua'] | [] | []
 5 | 5 | ['Jantar', 'Jantar pela segunda vez'] | [] | []
